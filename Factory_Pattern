@@ -1,0 +1,44 @@
+
+interface Vehicle{
+    void drive();
+}
+
+class Car implements Vehicle{
+    public void drive(){
+        System.out.println("Car is Driving");
+    }
+}
+
+class Bike implements Vehicle{
+    public void drive(){
+        System.out.println("Bike is driving");
+    }
+}
+
+
+class VehicleFactory{
+
+    public getVehicle(String type){
+        switch(toLowerCase(type)){
+            case "car":
+                return new Car();
+            case "bike" :
+                return new Bike();
+            default:
+                throw new IllegalArgumentException("Unkown Vehicle Type");
+
+        }
+    }
+}
+
+class Factory_Pattern{
+    public static void main(String[] args){
+        VehicleFactor factory = new VehicleFactory();
+        Vehicle vehicle1 = factory.getVehicle("car");
+        Vehicle vehicle2= factory.getVehicle("bike");
+
+        vehicle1.drive();
+        vehicle2.drive();
+
+    }
+}

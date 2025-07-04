@@ -1,0 +1,55 @@
+interface Observer{
+    void alert(String message);
+}
+
+interface Subject{
+    void addObserver(Observer observer);
+    void removeObserver(Observer observer);
+    void alertAll(String message);
+}
+
+class NewsAgency implements subject{
+    private List<Observer> observers;
+    public NewsAgency(){
+        observers = new ArrayList<>();
+    }
+
+    public void addObsercer(Observer observer){
+        observers.add(observer);
+    }
+
+    public void removeObserver(Observer observer){
+        observers.remove(observer);
+    }
+    
+    public void alertAll(String message){
+        for( Observer o : observers){
+            o.alert(message);
+        }
+    }
+}
+
+class EmailSub implements Observer{
+    public void alert(String message){
+        System.out.println("Email subscriber received news :"+ message);
+    }
+
+}
+
+class SMSSub implements Observer{
+    public void alert(String message){
+        System.out.println("SMS subscriber received news :" + messge);
+    }
+}
+
+
+class Observer_Pattern{
+    public static void main(String[] args){
+        Subject news= new NewsAgency();
+        Observer emailSub = new EmailSub();
+        Observer smsSub = new SMSSub();
+        news.addObserver(emailSub);
+        news.addObserver(smsSub);
+        news.alertAll("Breaking news");
+    }
+}

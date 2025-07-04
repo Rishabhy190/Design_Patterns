@@ -1,0 +1,43 @@
+interface Payment{
+    void pay(double amount);
+}
+
+class CreditCardPayment implements Payment{
+    public void pay(double amount){
+        System.out.println("Rs :" + amount +" Paid using Credit Card");
+    }
+}
+
+class UpiPayment implements Payment{
+    public void pay(double amount){
+        System.out.println("Rs :" + amount +" Paid using UPI");
+    }
+}
+
+class ShoppingCart{
+    private Payment payment;
+
+    public void setPayment(Payment payment){
+        this.payment = payment;
+    }
+
+    public void checkout(double amount){
+        payment.pay(amount);
+    }
+    
+}
+
+class Strategy_Pattern{
+    public static void main(String[] args){
+        ShoppingCart s= new ShoppingCart();
+        Payment payment = new CreditCardPayment();
+        s.setPayment(payment);
+        s.checkout(100.0);
+
+        payment = new UpiPayment();
+        s.setPayment(payment);
+        s.checkout(100.0);
+
+    }
+
+}
